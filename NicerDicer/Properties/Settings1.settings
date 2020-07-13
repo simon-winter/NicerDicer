@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="NicerDicer.Properties" GeneratedClassName="Settings1">
+  <Profiles />
+  <Settings>
+    <Setting Name="Command" Type="System.String" Scope="User">
+      <Value Profile="(Default)">!r </Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
