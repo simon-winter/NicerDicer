@@ -5,73 +5,61 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NicerDicer"
         mc:Ignorable="d"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
         Title="Nicer Dicer" Height="450" Width="800">
-    <Grid 
-        HorizontalAlignment="Stretch"
-        VerticalAlignment="Stretch">       
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>            
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>            
-        </Grid.ColumnDefinitions>
-        
-        <TextBlock
-            HorizontalAlignment="Right"
-            VerticalAlignment="Center"
-            Margin="2,2,2,2"
-            FontSize="16"
-            Text="Command Prefix: "/>
-        <TextBox 
-            Name="CommandTextBox"
-            Grid.ColumnSpan="2"
-            Grid.Column="1"     
-            VerticalAlignment="Center"
-            FontSize="16"
-            MinWidth="100"
-            Margin="2,2,2,2"/>
-        <TextBlock 
-            Grid.Column="1"   
-            Grid.Row="1"
-            VerticalAlignment="Center"
-            Text="(Example Output)"
-            FontSize="12"            
-            Margin="2,2,2,2"/>
-        <TextBlock 
-            Name="ExampleLabel"
-            Grid.Column="2" 
-            Grid.Row="1"
-            VerticalAlignment="Center"
-            FontSize="12"
-            Text=""
-            Margin="2,2,2,2"/>
-        
-        <Grid    
-            Grid.ColumnSpan="3"
-            Grid.Row ="2"
-            x:Name="diceGrid"
+    <DockPanel
+        Margin="2">
+        <Grid 
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>            
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ToggleButton
+                Name="_ExplodingDiceButton"
+                IsChecked="{Binding ExplodingDice}"
+                Grid.Column="0"
+                VerticalAlignment="Center"  
+                MinWidth="50"           
+                Content="Exploding Dice"
+                Margin="2"/>
+            <TextBlock     
+                Grid.Column="1"   
+                VerticalAlignment="Center"
+                HorizontalAlignment="left"
+                Margin="2"            
+                Text="Prefix: "
+                MinWidth="0"/>
+            <TextBox                         
+                Grid.Column="2"     
+                VerticalAlignment="Center"
+                HorizontalAlignment="left"
+                MinWidth="50"
+                Margin="2"
+                Text="{Binding Prefix}"/>
+                        
+            <TextBlock                
+                HorizontalAlignment="Right"
+                Grid.Column="4"
+                VerticalAlignment="Center"
+                FontSize="12"
+                Text= "{Binding ExampleOutput}"           
+                Margin="2"/>
+
+            <Grid    
+                Grid.ColumnSpan="5"
+                Grid.Row ="2"
+                x:Name="diceGrid"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"/>
         </Grid>
-    </Grid>
+    </DockPanel>
 </Window>
