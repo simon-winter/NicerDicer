@@ -46,5 +46,17 @@ namespace NicerDicer.Properties {
                 this["ExplodingDice"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ChannelName {
+            get {
+                return ((string)(this["ChannelName"]));
+            }
+            set {
+                this["ChannelName"] = value;
+            }
+        }
     }
 }

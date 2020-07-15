@@ -1,11 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using NicerDicer.Properties;
@@ -19,6 +17,22 @@ namespace NicerDicer
 
         int diceAmount = 6;
         int diceValueCap = 14;
+
+        private string _channelName;
+        public string ChannelName {
+            get
+            {
+                return _channelName;
+            }
+            set
+            {
+                _channelName = value;
+                RaisePropertyChanged("ChannelName");
+                
+                Settings.Default.ChannelName = value;
+                Settings.Default.Save();
+            }
+        }
 
         private string _prefix;
         public string Prefix {
@@ -75,6 +89,7 @@ namespace NicerDicer
             this.SizeChanged += OnWindowSizeChanged;
 
             Prefix = Settings.Default.Prefix;
+            ChannelName = Settings.Default.ChannelName;
             ExplodingDice = Settings.Default.ExplodingDice;
 
             BuildDiceGrid();
@@ -138,7 +153,7 @@ namespace NicerDicer
                     newMargin.Right = cellWidth * 0.01f;
 
                     btn.Margin = newMargin;
-                    btn.BorderThickness = maxBorderThick;
+                    btn.BorderThickness = maxBorderThick;                   
                 }
             }
         }
@@ -147,9 +162,12 @@ namespace NicerDicer
             if (sender is Button btn) {
                 ChangeBackgroundForDuration(btn, Brushes.LightGreen, 200);
                 string[] diceInfo = Regex.Split(btn.Content.ToString(), "d");
-                Clipboard.SetText(
-                    BuildDiceString(int.Parse(diceInfo[0]), int.Parse(diceInfo[1]))
-                    );
+                string rollText = BuildDiceString(int.Parse(diceInfo[0]), int.Parse(diceInfo[1]));
+                Clipboard.SetText(rollText);
+
+                if (!DiscordPaster.PostInDiscord(rollText, ChannelName)) {
+                    ChangeBackgroundForDuration(btn, Brushes.Red, 200);
+                }
             }
         }
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e) {
@@ -167,5 +185,6 @@ namespace NicerDicer
         private void RaisePropertyChanged(string propertyName) {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        
     }
 }

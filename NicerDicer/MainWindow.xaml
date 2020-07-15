@@ -19,8 +19,9 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <ToggleButton
@@ -36,7 +37,7 @@
                 VerticalAlignment="Center"
                 HorizontalAlignment="left"
                 Margin="2"            
-                Text="Prefix: "
+                Text=" Prefix:"
                 MinWidth="0"/>
             <TextBox                         
                 Grid.Column="2"     
@@ -45,17 +46,34 @@
                 MinWidth="50"
                 Margin="2"
                 Text="{Binding Prefix}"/>
-                        
+            <TextBlock                         
+                Grid.Column="3"     
+                VerticalAlignment="Center"
+                HorizontalAlignment="left"
+                MinWidth="50"
+                Margin="2"
+                Text=" Channel:"/>
+
+            <TextBox              
+                HorizontalAlignment="left"
+                Grid.Column="4"
+                VerticalAlignment="Center"
+                FontSize="12"
+                Text= "{Binding ChannelName}"      
+                MinWidth="50"
+                Margin="2"/>
+
             <TextBlock                
                 HorizontalAlignment="Right"
-                Grid.Column="4"
+                Grid.Column="5"
                 VerticalAlignment="Center"
                 FontSize="12"
                 Text= "{Binding ExampleOutput}"           
                 Margin="2"/>
+            
 
             <Grid    
-                Grid.ColumnSpan="5"
+                Grid.ColumnSpan="6"
                 Grid.Row ="2"
                 x:Name="diceGrid"
                 HorizontalAlignment="Stretch"
