@@ -5,11 +5,26 @@
     <Setting Name="Prefix" Type="System.String" Scope="User">
       <Value Profile="(Default)">!r </Value>
     </Setting>
-    <Setting Name="ExplodingDice" Type="System.Boolean" Scope="User">
+    <Setting Name="UseExplodingDice" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="ChannelName" Type="System.String" Scope="User">
       <Value Profile="(Default)">#rolls</Value>
+    </Setting>
+    <Setting Name="UseAutoPosting" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ExplDiceCmd" Type="System.String" Scope="User">
+      <Value Profile="(Default)">e</Value>
+    </Setting>
+    <Setting Name="DiceAmount" Type="System.String" Scope="User">
+      <Value Profile="(Default)">2,6</Value>
+    </Setting>
+    <Setting Name="DiceSizes" Type="System.String" Scope="User">
+      <Value Profile="(Default)">4,6,8,10,12,20</Value>
+    </Setting>
+    <Setting Name="SettingsOpened" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

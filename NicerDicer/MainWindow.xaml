@@ -3,80 +3,196 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:NicerDicer"
+        xmlns:local="clr-namespace:NicerDicer"      
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
         Title="Nicer Dicer" Height="450" Width="800">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Window.Resources>
+
     <DockPanel        
         Margin="2">
-        <Grid 
-            DockPanel.Dock="Top"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+        <Grid  DockPanel.Dock="Top">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <ToggleButton
-                Name="_ExplodingDiceButton"
-                IsChecked="{Binding ExplodingDice}"
+            <TextBlock
                 Grid.Column="0"
-                VerticalAlignment="Center"  
-                MinWidth="50"           
-                Content="Exploding Dice"
-                Margin="2"/>
-            <TextBlock     
-                Grid.Column="1"   
+                HorizontalAlignment="right"                
+                VerticalAlignment="Center"
+                FontSize="12"
+                Text= "{Binding ExampleOutput}"          
+                Margin="4,2,4,2"/>
+            <Button 
+                Grid.Column="1"
+                HorizontalAlignment="Right"
+                Margin="4,2,4,2"
+                Height="20"
+                Width="30"
+                Click="Button_Click">
+                <Image Source="/img/settings.png" />
+            </Button>
+        </Grid>
+        <Grid VerticalAlignment="Stretch"
+              HorizontalAlignment="Stretch">
+            <Grid           
+            x:Name="diceGrid"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch" />
+            <Grid 
+            Background="LightGray" 
+            Visibility="{Binding SettingsOpened, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Border BorderBrush="Black" BorderThickness="1" Grid.Column="0" Grid.Row="0">
+                    <TextBlock                
+                VerticalAlignment="Center"
+                HorizontalAlignment="left"
+                MinWidth="50"
+                Margin="2"
+                Text="Dice sizes"/>
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="0.5" Grid.Column="1" Grid.Row="0">
+                    <TextBox
+                HorizontalAlignment="Stretch"                
+                VerticalAlignment="Center"
+                FontSize="12"
+                Text= "{Binding DiceSizes}"      
+                MinWidth="50"
+                Margin="2"
+                ToolTip="Provide the dice values you want to use, seperated by a comma.&#x0a;4,6,8,10,12,20 = all common dices"/>
+                </Border>
+                <TextBlock Grid.Column="2" Grid.Row="0"  
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"              
+                Margin="2"
+                Text="{Binding DiceSizesValidation}"/>
+
+                <Border BorderBrush="Black" BorderThickness="1" Grid.Column="0" Grid.Row="1">
+                    <TextBlock                
+                VerticalAlignment="Center"
+                HorizontalAlignment="left"
+                MinWidth="50"
+                Margin="2"
+                Text="Dice amount"/>
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="0.5" Grid.Column="1" Grid.Row="1">
+                    <TextBox
+                HorizontalAlignment="left"                
+                VerticalAlignment="Center"
+                FontSize="12"
+                Text= "{Binding DiceAmount}"      
+                MinWidth="100"
+                Margin="2"
+                ToolTip="Provide the minimum and maximum amount of dices, seperated by a comma.&#x0a;2,6 = create buttons from 2 up to 6 dices per dice size."/>
+                </Border>
+                <TextBlock Grid.Column="2" Grid.Row="1"  
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"              
+                Margin="2"
+                Text="{Binding DiceAmountValidation}"/>
+
+
+                <Border BorderBrush="Black" BorderThickness="1" Grid.Column="0" Grid.Row="2">
+                    <TextBlock                   
                 VerticalAlignment="Center"
                 HorizontalAlignment="left"
                 Margin="2"            
-                Text=" Prefix:"
+                Text="Exploding dice"
                 MinWidth="0"/>
-            <TextBox                         
-                Grid.Column="2"     
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="0.5" Grid.Column="1" Grid.Row="2">
+                    <ToggleButton Style="{StaticResource ToggleButtonBool}"
+                Name="_UseExplodingDiceButton"
+                IsChecked="{Binding UseExplodingDice}"
+                Grid.Column="1"
+                VerticalAlignment="Center"  
+                Width="50"           
+                Content="Enable"
+                Margin="2"/>
+                </Border>
+                <TextBlock Grid.Column="2" Grid.Row="2"
+                VerticalAlignment="Center"
+                HorizontalAlignment="left"
+                Margin="2"            
+                Text="command:"
+                MinWidth="0"/>
+                <TextBox Grid.Column="3" Grid.Row="2"    
                 VerticalAlignment="Center"
                 HorizontalAlignment="left"
                 MinWidth="50"
                 Margin="2"
-                Text="{Binding Prefix}"/>
-            <TextBlock                         
-                Grid.Column="3"     
-                VerticalAlignment="Center"
-                HorizontalAlignment="left"
-                MinWidth="50"
-                Margin="2"
-                Text=" Channel:"/>
+                Text="{Binding ExplDiceCmd}"
+                ToolTip="WIP, appends this text and the used dice Size to the text. one 1d6 becomes 1d6e6. Customizable commands will come sooner or later"/>
 
-            <TextBox              
+                <Border BorderBrush="Black" BorderThickness="1" Grid.Column="0" Grid.Row="3">
+                    <TextBlock                
+                VerticalAlignment="Center"
                 HorizontalAlignment="left"
-                Grid.Column="4"
+                MinWidth="50"
+                Margin="2"
+                Text="Auto Posting"/>
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="0.5" Grid.Column="1" Grid.Row="3">
+                    <ToggleButton Style="{StaticResource ToggleButtonBool}"
+                Name="_UseAutoPostingButton"
+                IsChecked="{Binding UseAutoPosting}"
+                Grid.Column="1"
+                VerticalAlignment="Center"  
+                Width="50"           
+                Content="Enable"
+                Margin="2"/>
+                </Border>
+                <TextBlock Grid.Column="2" Grid.Row="3"
+                VerticalAlignment="Center"
+                HorizontalAlignment="left"
+                MinWidth="50"
+                Margin="2"
+                Text="channel:"/>
+                <TextBox Grid.Column="3" Grid.Row="3"
+                HorizontalAlignment="left"                
                 VerticalAlignment="Center"
                 FontSize="12"
                 Text= "{Binding ChannelName}"      
                 MinWidth="50"
-                Margin="2"/>
+                Margin="2"
+                ToolTip="The exact name of the discord channel. #rolls = only when that exact channel can be found, text will get posted."/>
 
-            <TextBlock                
-                HorizontalAlignment="Right"
-                Grid.Column="5"
+                <Border BorderBrush="Black" BorderThickness="1" Grid.Column="0" Grid.Row="4">
+                    <TextBlock                
+                VerticalAlignment="Center"
+                HorizontalAlignment="left"
+                MinWidth="50"
+                Margin="2"
+                Text="Roll command"/>
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="0.5" Grid.Column="1" Grid.Row="4">
+                    <TextBox
+                HorizontalAlignment="Stretch"                
                 VerticalAlignment="Center"
                 FontSize="12"
-                Text= "{Binding ExampleOutput}"           
-                Margin="2"/>
+                Text= "{Binding Prefix}"      
+                MinWidth="100"
+                Margin="2"
+                ToolTip="The Prefix for rolling. !r = will add !r to the front. Don't forget the spaces!"/>
+                </Border>
 
+            </Grid>
         </Grid>
-        <Grid
-            x:Name="diceGrid"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch" />
 
     </DockPanel>
 </Window>

@@ -38,12 +38,12 @@ namespace NicerDicer.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool ExplodingDice {
+        public bool UseExplodingDice {
             get {
-                return ((bool)(this["ExplodingDice"]));
+                return ((bool)(this["UseExplodingDice"]));
             }
             set {
-                this["ExplodingDice"] = value;
+                this["UseExplodingDice"] = value;
             }
         }
         
@@ -56,6 +56,66 @@ namespace NicerDicer.Properties {
             }
             set {
                 this["ChannelName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseAutoPosting {
+            get {
+                return ((bool)(this["UseAutoPosting"]));
+            }
+            set {
+                this["UseAutoPosting"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("e")]
+        public string ExplDiceCmd {
+            get {
+                return ((string)(this["ExplDiceCmd"]));
+            }
+            set {
+                this["ExplDiceCmd"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2,6")]
+        public string DiceAmount {
+            get {
+                return ((string)(this["DiceAmount"]));
+            }
+            set {
+                this["DiceAmount"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("4,6,8,10,12,20")]
+        public string DiceSizes {
+            get {
+                return ((string)(this["DiceSizes"]));
+            }
+            set {
+                this["DiceSizes"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SettingsOpened {
+            get {
+                return ((bool)(this["SettingsOpened"]));
+            }
+            set {
+                this["SettingsOpened"] = value;
             }
         }
     }
