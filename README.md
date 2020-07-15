@@ -1,9 +1,6 @@
 # NicerDicer
 
-This is a small Windows Application, which generates Texts used for RPG dice rolling discord bots. 
-All common dice types are represented as a scalable Button grid.
-
-![](https://github.com/simon-winter/NicerDicer/blob/master/NicerDicer/screen.jpg)
+*No installation required, self contained single .exe to execute.*
 
 Let's say you are tired of typing your desired rolls into chat, this application creates the complete text by buttonpress and copys that into your clipboard.
 Now you can paste that Text wherever you want with "ctrl + v"!
@@ -14,8 +11,19 @@ Automatic posting into Discord is also available! When you click a button, the s
 If the channel name matches the one you provided in the headerbar, the text is automatically send there and posted (green button flash). 
 If it cant find the Discord window or the currently openend channelname is wrong, the text is only posted to your clipboard (red button flash). 
 
+![](https://github.com/simon-winter/NicerDicer/blob/master/NicerDicer/screen.jpg)
+
+This is a small Windows application, which generates texts used for RPG dice rolling discord bots (currently only tested with Avrae).
+All common dice types are represented as a scalable Button grid.
+
+This App does not hook into Discord or uses any networking, its just a set of buttons which create text-strings and optionally focuses a window 
+and simulates key presses (to send that text).
+
+New features/optins might come especially if requested.
+
+
 ### Building
 
 To build this yourself, clone the repository, open the solution in Visual Studio, right click the projectfile and select "Publish..." with your desired settings.
 
-### 
+
