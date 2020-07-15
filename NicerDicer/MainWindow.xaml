@@ -7,13 +7,14 @@
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
         Title="Nicer Dicer" Height="450" Width="800">
-    <DockPanel
+    <DockPanel        
         Margin="2">
         <Grid 
+            DockPanel.Dock="Top"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch">
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>            
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -70,14 +71,12 @@
                 FontSize="12"
                 Text= "{Binding ExampleOutput}"           
                 Margin="2"/>
-            
 
-            <Grid    
-                Grid.ColumnSpan="6"
-                Grid.Row ="2"
-                x:Name="diceGrid"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"/>
         </Grid>
+        <Grid
+            x:Name="diceGrid"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch" />
+
     </DockPanel>
 </Window>

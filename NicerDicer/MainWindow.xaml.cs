@@ -11,12 +11,15 @@ using NicerDicer.Properties;
 namespace NicerDicer
 {
     public partial class MainWindow : Window, INotifyPropertyChanged
-    {        
-        private Thickness minBorderThick = new Thickness(0.5f);
+    {
+        private Thickness minBorderThick = new Thickness(1);
         private Thickness maxBorderThick = new Thickness(2);
 
         int diceAmount = 6;
         int diceValueCap = 14;
+
+        int lastRollAmount = 1;
+        int lastRollSize = 6;
 
         private string _channelName;
         public string ChannelName {
@@ -28,7 +31,7 @@ namespace NicerDicer
             {
                 _channelName = value;
                 RaisePropertyChanged("ChannelName");
-                
+
                 Settings.Default.ChannelName = value;
                 Settings.Default.Save();
             }
@@ -44,7 +47,7 @@ namespace NicerDicer
             {
                 _prefix = value;
                 RaisePropertyChanged("Prefix");
-                ExampleOutput = BuildDiceString(1, 6);
+                ExampleOutput = BuildDiceString(lastRollAmount, lastRollSize);
                 Settings.Default.Prefix = value;
                 Settings.Default.Save();
             }
@@ -61,15 +64,13 @@ namespace NicerDicer
             {
                 _explodingDice = value;
                 RaisePropertyChanged("ExplodingDice");
-                ExampleOutput = BuildDiceString(1, 6);
+                ExampleOutput = BuildDiceString(lastRollAmount, lastRollSize);
                 Settings.Default.ExplodingDice = value;
                 Settings.Default.Save();
             }
         }
 
         private string _exampleOutput;
-
-
         public string ExampleOutput {
             get
             {
@@ -79,6 +80,7 @@ namespace NicerDicer
             {
                 _exampleOutput = value;
                 RaisePropertyChanged("ExampleOutput");
+                Clipboard.SetText(_exampleOutput);
             }
         }
 
@@ -117,7 +119,8 @@ namespace NicerDicer
                         Content = $"{diceAmount}d{diceSize}",
                         BorderThickness = new Thickness(2),
                         MinWidth = 10,
-                        Margin = new Thickness(5)
+                        Margin = new Thickness(5),
+                        Background = Brushes.LightGray
                     };
                     Grid.SetRow(btn, row - 1);
                     Grid.SetColumn(btn, diceAmount - 1);
@@ -137,11 +140,10 @@ namespace NicerDicer
 
             foreach (Button btn in diceGrid.Children) {
 
-
                 double cellHeight = diceGrid.ActualHeight / diceGrid.RowDefinitions.Count;
                 double cellWidth = diceGrid.ActualWidth / diceGrid.ColumnDefinitions.Count;
 
-                if (cellHeight < 30 || cellWidth < 40) {
+                if (cellHeight < 30 || cellWidth < 50) {
                     btn.Margin = new Thickness(0);
                     btn.BorderThickness = minBorderThick;
                 }
@@ -153,7 +155,7 @@ namespace NicerDicer
                     newMargin.Right = cellWidth * 0.01f;
 
                     btn.Margin = newMargin;
-                    btn.BorderThickness = maxBorderThick;                   
+                    btn.BorderThickness = maxBorderThick;
                 }
             }
         }
@@ -161,10 +163,13 @@ namespace NicerDicer
         private void OnButtonClicked(object sender, EventArgs e) {
             if (sender is Button btn) {
                 ChangeBackgroundForDuration(btn, Brushes.LightGreen, 200);
-                string[] diceInfo = Regex.Split(btn.Content.ToString(), "d");
-                string rollText = BuildDiceString(int.Parse(diceInfo[0]), int.Parse(diceInfo[1]));
-                Clipboard.SetText(rollText);
 
+                string[] diceInfo = Regex.Split(btn.Content.ToString(), "d");
+                lastRollAmount = int.Parse(diceInfo[0]);
+                lastRollSize = int.Parse(diceInfo[1]);
+
+                string rollText = BuildDiceString(lastRollAmount, lastRollSize);
+                ExampleOutput = rollText;
                 if (!DiscordPaster.PostInDiscord(rollText, ChannelName)) {
                     ChangeBackgroundForDuration(btn, Brushes.Red, 200);
                 }
@@ -172,6 +177,7 @@ namespace NicerDicer
         }
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e) {
             base.OnMouseLeftButtonDown(e);
+            // reset focus on click into application, so textboxes get unselected and updated
             _ExplodingDiceButton.Focus();
         }
 
@@ -185,6 +191,6 @@ namespace NicerDicer
         private void RaisePropertyChanged(string propertyName) {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        
+
     }
 }
