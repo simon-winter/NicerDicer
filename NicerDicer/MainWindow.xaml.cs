@@ -32,6 +32,9 @@ namespace NicerDicer
             {
                 _settingsOpened = value;
                 RaisePropertyChanged("SettingsOpened");
+                if (!SettingsOpened) {
+                    BuildDiceGrid();
+                }
             }
         }
 
@@ -213,6 +216,10 @@ namespace NicerDicer
         }
 
         private void BuildDiceGrid() {
+
+            diceGrid.Children.Clear();
+            diceGrid.ColumnDefinitions.Clear();
+            diceGrid.RowDefinitions.Clear();
 
             int minDiceAmount, maxDiceAmount;
             if (!ValidateDiceAmount(out minDiceAmount, out maxDiceAmount)) {
