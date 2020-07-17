@@ -14,7 +14,7 @@ If it cant find the Discord window or the currently openend channelname is wrong
 ![](https://github.com/simon-winter/NicerDicer/blob/master/NicerDicer/screen.jpg)
 
 This is a small Windows application, which generates texts used for RPG dice rolling discord bots (currently only tested with Avrae).
-All common dice types are represented as a scalable Button grid.
+Dice types, dice amount and also the specific commands are easily customizable.
 
 This App does not hook into Discord or uses any networking, its just a set of buttons which create text-strings and optionally focuses a window 
 and simulates key presses (to send that text).
