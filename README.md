@@ -21,6 +21,11 @@ and simulates key presses (to send that text).
 
 New features/optins might come especially if requested.
 
+### Download ready to go .exe
+
+find the latest release here:
+https://github.com/simon-winter/NicerDicer/releases
+just download, extract .zip and start using it!
 
 ### Building
 
