@@ -21,13 +21,13 @@ and simulates key presses (to send that text).
 
 New features/optins might come especially if requested.
 
-### Download ready to go .exe
+# Download
 
 find the latest release here:
 https://github.com/simon-winter/NicerDicer/releases
 just download, extract .zip and start using it!
 
-### Building
+### Building yourself
 
 To build this yourself, clone the repository, open the solution in Visual Studio, right click the projectfile and select "Publish..." with your desired settings.
 
